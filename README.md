@@ -1,71 +1,69 @@
-**Yellow Taxi Data Analysis – SQL** 
-**Overview**
-End-to-end analysis of New York City Yellow Taxi trip data using SQL for data querying and Power BI for interactive dashboards. The project uncovers patterns in trip demand, fare amounts, payment behaviour, and temporal trends.
+# 🚕 NYC Yellow Taxi Data Analysis – Power BI Dashboard
 
-**Tools Used**
+## Overview
 
-**MySQL** — data querying and business analysis
-**Dataset** — NYC Yellow Taxi Trip Records (2016-03)
+End-to-end data analytics project on the NYC Yellow Taxi dataset. Built an interactive Power BI dashboard to uncover trip demand patterns, revenue trends, and operational insights across thousands of rides.
 
-**SQL Analysis**
-**Business Questions Answered**
-**1. Most preferred payment type**
-SELECT payment_type, COUNT(*) AS most_used_payments
-FROM yellow_tripdata
-GROUP BY payment_type
-ORDER BY most_used_payments DESC;
-→ Payment type 1 is most preferred. Type 3 is rarely used — a significant outlier.
-**3. Average fare amount**
-SELECT ROUND(AVG(fare_amount), 2) AS avg_fare_amount
-FROM yellow_tripdata;
-→ Average fare: $12.66
-**4. Total revenue**
-SELECT ROUND(SUM(total_amount), 2) AS total_revenue
-FROM yellow_tripdata;
-→ Total revenue: $13,718.65
-**5. Trip distance breakdown**
-SELECT CASE
-    WHEN trip_distance < 2 THEN 'Short'
-    WHEN trip_distance BETWEEN 2 AND 5 THEN 'Medium'
-    ELSE 'Long'
-END AS trip_category,
-COUNT(*) AS total_trips
-FROM yellow_tripdata
-GROUP BY trip_category
-ORDER BY total_trips DESC;
-→ Majority of trips are short distance (under 2 miles)
-**6. Day vs Night trip patterns**
-sqlSELECT CASE
-    WHEN HOUR(tpep_pickup_datetime) BETWEEN 7 AND 12 THEN 'Morning'
-    WHEN HOUR(tpep_pickup_datetime) BETWEEN 13 AND 17 THEN 'Afternoon'
-    WHEN HOUR(tpep_pickup_datetime) BETWEEN 18 AND 22 THEN 'Evening'
-    ELSE 'Midnight'
-END AS time_of_day,
-COUNT(*) AS total_trips
-FROM yellow_tripdata
-GROUP BY time_of_day
-ORDER BY total_trips DESC;
-**7. Revenue and tips by payment type**
-→ Payment type 1 generates highest total revenue and tips
+---
 
-**Key Findings**
-InsightFindingPeak trip hours13:00 and 14:00 — 61K trips eachLowest demand05:00 — only 16K tripsHighest average fare05:00 — $17.0 (airport/night rides)Lowest average fare10:00–11:00 — $11.7 (short city commutes)Busiest dayFriday — 356K tripsQuietest dayMonday — 98K tripsAverage fare (SQL)$12.66 per tripPreferred paymentType 1 (likely credit card)Most common tripShort distance (under 2 miles)
+## 📊 Dashboard Highlights
 
-**Business Recommendations**
-Maximize driver availability at 1–2 PM — peak demand of 61K trips
-Target early morning shifts (5 AM) — highest average fare of $17.0 despite low volume
-Friday staffing should be prioritized — nearly 4x Monday demand
-Promote digital payments — type 1 generates highest revenue and tips
+- **Trip Volume Analysis** — total trips by day, month, and time of day
+- **Revenue Metrics** — fare amounts, tips, surcharges, and total earnings
+- **Peak Hour Patterns** — identifies highest-demand hours and weekday vs weekend trends
+- **Trip Characteristics** — average distance, duration, and fare per trip
+- **Location Insights** — pickup and drop-off zone breakdowns
 
-Files in this Repository
-FileDescriptiontaxidata1.pbixPower BI dashboard fileyellow_taxi.sqlSQL queries for analysisscreenshot1.pngTrip volume by hour chartscreenshot2.pngAverage fare by hour chartscreenshot3.pngTrips by day of week chart
+> 💡 All visuals are interactive — use slicers and filters to explore the data dynamically.
 
-Author
-Srishma Reddy Manne
+---
 
-📧 mannesrishma@gmail.com
-💼 LinkedIn
-🐙 GitHub
+## 🛠 Tech Stack
 
+| Tool | Usage |
+|------|-------|
+| Power BI Desktop | Dashboard design, DAX measures, interactive visuals |
+| Power Query | Data cleaning and transformation |
+| NYC TLC Dataset | Source data (trip records) |
 
-Master's student in Data Science at Hochschule für Angewandte Wissenschaften Kiel, Germany
+---
+
+## 📁 Files
+
+| File | Description |
+|------|-------------|
+| `taxidata1.pbix` | Full Power BI report with all visuals and data model |
+
+---
+
+## 🚀 How to Run
+
+1. Install [Power BI Desktop](https://powerbi.microsoft.com/desktop/) (free, Windows)
+2. Clone or download this repository
+3. Open `taxidata1.pbix` in Power BI Desktop
+4. Refresh data if prompted
+5. Use slicers to filter by date, zone, or trip type
+
+---
+
+## 🔍 Key Insights
+
+- Evening hours (6–8 PM) show the highest trip demand
+- Tips are significantly higher on weekend trips vs weekdays
+- Average fare increases proportionally with distance — no major pricing anomalies detected
+- Certain pickup zones consistently generate higher revenue
+
+---
+
+## ⚠️ Limitations
+
+- Analysis is based on a sample of the full NYC TLC dataset
+- Geographic visuals depend on zone field availability
+- Results are descriptive — not causal
+
+---
+
+## 👩‍💻 About
+
+Built by [Srishma Reddy Manne](https://linkedin.com/in/srishma-reddy-manne) — M.Sc. Data Science student at HAW Kiel, Germany.  
+🔗 [LinkedIn](https://linkedin.com/in/srishma-reddy-manne) · [GitHub](https://github.com/Srishma0912)
